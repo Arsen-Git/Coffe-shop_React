@@ -188,6 +188,87 @@ export default function App() {
           </div>
         </div>
       </main>
+      <div className="cart__container">
+        <div className="cart__content">
+          <div className="cart__head">
+            <h2 className="cart__title">Кошик</h2>
+            <img
+              width={32}
+              height={32}
+              className="delBtn"
+              src="./img/delBtn.svg"
+              alt="delete"
+            />
+          </div>
+          <div className="cart__list">
+            <div className="cart__item">
+              <img
+                width={70}
+                height={70}
+                className="cart__img"
+                src="./img/sneakers2.png"
+                alt="sneakers"
+              />
+              <div className="cart__item__textGroup">
+                <div className="cart__item__name">
+                  Мужские Кроссовки Nike Air Max 270
+                </div>
+                <div className="cart__item__price">12 999 грн.</div>
+              </div>
+              <img
+                width={32}
+                height={32}
+                className="delBtn"
+                src="./img/delBtn.svg"
+                alt="delete"
+              />
+            </div>
+            <div className="cart__item">
+              <img
+                width={70}
+                height={70}
+                className="cart__img"
+                src="./img/sneakers2.png"
+                alt="sneakers"
+              />
+              <div className="cart__item__textGroup">
+                <div className="cart__item__name">
+                  Мужские Кроссовки Nike Air Max 270
+                </div>
+                <div className="cart__item__price">12 999 грн.</div>
+              </div>
+              <img
+                width={32}
+                height={32}
+                className="delBtn"
+                src="./img/delBtn.svg"
+                alt="delete"
+              />
+            </div>
+          </div>
+          <div className="cart__submit">
+            <div className="cart__submit__line">
+              <span>Разом</span>
+              <div></div>
+              <b>21 450 грн.</b>
+            </div>
+            <div className="cart__submit__line">
+              <span>Податок</span>
+              <div></div>
+              <b>1540 грн.</b>
+            </div>
+          </div>
+          <button className="cart__submitBtn">
+            Оформити замовлення{" "}
+            <img
+              width={14}
+              height={12}
+              src="./img/btn__arrow.svg"
+              alt="arrow"
+            />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
