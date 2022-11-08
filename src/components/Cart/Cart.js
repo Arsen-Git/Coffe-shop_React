@@ -28,6 +28,7 @@ export default function Cart(props) {
                 <div className="cart__item__price">{item.price} грн.</div>
               </div>
               <img
+                onClick={() => props.deleteItem(item)}
                 width={32}
                 height={32}
                 className="delBtn"
