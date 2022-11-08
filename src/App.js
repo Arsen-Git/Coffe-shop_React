@@ -1,37 +1,46 @@
+import React, { useEffect } from "react";
+import Header from "./components/Header/Header";
+import Cart from "./components/Cart/Cart";
+import Card from "./components/Card/Card";
+
 export default function App() {
+  const [isCartOpen, setIsCartOpen] = React.useState(false);
+  const [items, setItems] = React.useState([]);
+  const [cartItems, setCartItems] = React.useState([]);
+  const [cartPrice, setCartPrice] = React.useState(0);
+
+  const onAddCart = (obj) => {
+    const index = cartItems.findIndex((item) => item.id === obj.id);
+    if (index === -1) {
+      setCartItems([...cartItems, obj]);
+      setCartPrice(cartPrice + parseInt(obj.price));
+    } else {
+      const newCartItems = cartItems;
+      newCartItems.splice(index, 1);
+      setCartItems(newCartItems);
+      setCartPrice(cartPrice - parseInt(obj.price));
+    }
+  };
+
+  const onCartOpen = () => {
+    setIsCartOpen(true);
+  };
+
+  const onCartClose = () => {
+    setIsCartOpen(false);
+  };
+
+  React.useEffect(() => {
+    fetch("https://6363becf37f2167d6f8223de.mockapi.io/items")
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => setItems(json));
+  }, []);
+
   return (
     <div className="wrapper">
-      <header className="header">
-        <div className="header__left">
-          <img
-            width={40}
-            height={40}
-            src="./img/sneakers__logo.svg"
-            alt="logo"
-          />
-          <div className="header__left__logoContainer">
-            <h2>REACT SNEAKERS</h2>
-            <p>Магазин найкращих кросівок</p>
-          </div>
-        </div>
-        <ul className="header__right">
-          <li className="header__right__cart">
-            <img width={20} height={20} src="./img/cart.svg" alt="cart" />
-            <p>1205 грн.</p>
-          </li>
-          <li className="header__right__favorite">
-            <img
-              width={20}
-              height={20}
-              src="./img/favourite.svg"
-              alt="favourite"
-            />
-          </li>
-          <li className="header__right__acc">
-            <img width={20} height={20} src="./img/acc.svg" alt="acc" />
-          </li>
-        </ul>
-      </header>
+      <Header onClickCart={onCartOpen} cartPrice={cartPrice} />
       <main className="sneakers__content">
         <div className="sneakers__head">
           <h1 className="sneakers__title">Всі кросівки</h1>
@@ -41,234 +50,14 @@ export default function App() {
           </div>
         </div>
         <div className="sneakers__list">
-          <div className="sneakers">
-            <img
-              width={32}
-              height={32}
-              className="sneakers__favourite"
-              src="./img/sneakers__fav.svg"
-              alt="favorite"
-            />
-            <img
-              className="sneakers__img"
-              src="./img/sneakers1.jpg"
-              alt="sneakers"
-            />
-            <p>
-              <b>Kросівки</b> Puma X Aka Boku Future Rider
-            </p>
-            <div className="sneakers__footer">
-              <div className="sneakers__price">
-                <span>Ціна</span>
-                <p>16 499 грн.</p>
-              </div>
-              <img
-                width={32}
-                height={32}
-                src="./img/sneakers__inactive.svg"
-                alt="inactive"
-              />
-            </div>
-          </div>
-          <div className="sneakers">
-            <img
-              width={32}
-              height={32}
-              className="sneakers__favourite"
-              src="./img/sneakers__fav.svg"
-              alt="favorite"
-            />
-            <img
-              className="sneakers__img"
-              src="./img/sneakers1.jpg"
-              alt="sneakers"
-            />
-            <p>
-              <b>Kросівки</b> Puma X Aka Boku Future Rider
-            </p>
-            <div className="sneakers__footer">
-              <div className="sneakers__price">
-                <span>Ціна</span>
-                <p>16 499 грн.</p>
-              </div>
-              <img
-                width={32}
-                height={32}
-                src="./img/sneakers__inactive.svg"
-                alt="inactive"
-              />
-            </div>
-          </div>
-          <div className="sneakers">
-            <img
-              width={32}
-              height={32}
-              className="sneakers__favourite"
-              src="./img/sneakers__fav.svg"
-              alt="favorite"
-            />
-            <img
-              className="sneakers__img"
-              src="./img/sneakers1.jpg"
-              alt="sneakers"
-            />
-            <p>
-              <b>Kросівки</b> Puma X Aka Boku Future Rider
-            </p>
-            <div className="sneakers__footer">
-              <div className="sneakers__price">
-                <span>Ціна</span>
-                <p>16 499 грн.</p>
-              </div>
-              <img
-                width={32}
-                height={32}
-                src="./img/sneakers__inactive.svg"
-                alt="inactive"
-              />
-            </div>
-          </div>
-          <div className="sneakers">
-            <img
-              width={32}
-              height={32}
-              className="sneakers__favourite"
-              src="./img/sneakers__fav.svg"
-              alt="favorite"
-            />
-            <img
-              className="sneakers__img"
-              src="./img/sneakers1.jpg"
-              alt="sneakers"
-            />
-            <p>
-              <b>Kросівки</b> Puma X Aka Boku Future Rider
-            </p>
-            <div className="sneakers__footer">
-              <div className="sneakers__price">
-                <span>Ціна</span>
-                <p>16 499 грн.</p>
-              </div>
-              <img
-                width={32}
-                height={32}
-                src="./img/sneakers__inactive.svg"
-                alt="inactive"
-              />
-            </div>
-          </div>
-          <div className="sneakers">
-            <img
-              width={32}
-              height={32}
-              className="sneakers__favourite"
-              src="./img/sneakers__fav.svg"
-              alt="favorite"
-            />
-            <img
-              className="sneakers__img"
-              src="./img/sneakers1.jpg"
-              alt="sneakers"
-            />
-            <p>
-              <b>Kросівки</b> Puma X Aka Boku Future Rider
-            </p>
-            <div className="sneakers__footer">
-              <div className="sneakers__price">
-                <span>Ціна</span>
-                <p>16 499 грн.</p>
-              </div>
-              <img
-                width={32}
-                height={32}
-                src="./img/sneakers__inactive.svg"
-                alt="inactive"
-              />
-            </div>
-          </div>
+          {items.map((item) => (
+            <Card key={item.id} data={item} onAddCart={onAddCart} />
+          ))}
         </div>
       </main>
-      <div className="cart__container">
-        <div className="cart__content">
-          <div className="cart__head">
-            <h2 className="cart__title">Кошик</h2>
-            <img
-              width={32}
-              height={32}
-              className="delBtn"
-              src="./img/delBtn.svg"
-              alt="delete"
-            />
-          </div>
-          <div className="cart__list">
-            <div className="cart__item">
-              <img
-                width={70}
-                height={70}
-                className="cart__img"
-                src="./img/sneakers2.png"
-                alt="sneakers"
-              />
-              <div className="cart__item__textGroup">
-                <div className="cart__item__name">
-                  Мужские Кроссовки Nike Air Max 270
-                </div>
-                <div className="cart__item__price">12 999 грн.</div>
-              </div>
-              <img
-                width={32}
-                height={32}
-                className="delBtn"
-                src="./img/delBtn.svg"
-                alt="delete"
-              />
-            </div>
-            <div className="cart__item">
-              <img
-                width={70}
-                height={70}
-                className="cart__img"
-                src="./img/sneakers2.png"
-                alt="sneakers"
-              />
-              <div className="cart__item__textGroup">
-                <div className="cart__item__name">
-                  Мужские Кроссовки Nike Air Max 270
-                </div>
-                <div className="cart__item__price">12 999 грн.</div>
-              </div>
-              <img
-                width={32}
-                height={32}
-                className="delBtn"
-                src="./img/delBtn.svg"
-                alt="delete"
-              />
-            </div>
-          </div>
-          <div className="cart__submit">
-            <div className="cart__submit__line">
-              <span>Разом</span>
-              <div></div>
-              <b>21 450 грн.</b>
-            </div>
-            <div className="cart__submit__line">
-              <span>Податок</span>
-              <div></div>
-              <b>1540 грн.</b>
-            </div>
-          </div>
-          <button className="cart__submitBtn">
-            Оформити замовлення{" "}
-            <img
-              width={14}
-              height={12}
-              src="./img/btn__arrow.svg"
-              alt="arrow"
-            />
-          </button>
-        </div>
-      </div>
+      {isCartOpen && (
+        <Cart onClose={onCartClose} data={cartItems} cartPrice={cartPrice} />
+      )}
     </div>
   );
 }
